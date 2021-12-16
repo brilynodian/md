@@ -289,6 +289,318 @@ alpha.relayMessage(anu, buatpesan.message, { messageId: buatpesan.key.id })
                 m.reply('Sukses Ganti Ke Mode Public')
             }
             break
+		case 'kusonime':
+
+			try {
+				if (args
+					.length < 1)
+					return reply(
+						'Anime apa yg di cari?'
+						)
+				mmeku = body
+					.slice(10)
+				await axios.get(
+						'https://kusonime.com/?s=' +
+						mmeku)
+					.then(async res => {
+						const
+							animenya =
+							await cheerio
+							.load(
+								res
+								.data
+								);
+						const
+							linkanime1 =
+							await animenya(
+								'div[class="content"] > h2 > a'
+								);
+						let link1 =
+							await linkanime1
+							.attr(
+								'href'
+								);
+						await axios
+							.get(
+								link1
+								)
+							.then(
+								async res => {
+									let links360 =
+										await [];
+									let links480 =
+										await [];
+									let links720 =
+										await [];
+									let links1080 =
+										await [];
+									const
+										animeitu =
+										await cheerio
+										.load(
+											res
+											.data
+											);
+									await animeitu
+										(
+											'.dlbod > .smokeddl > .smokeurl > a')
+										.slice(
+											0,
+											3
+											)
+										.each(
+											async (index,
+												value
+												) => {
+												let link360 =
+													await animeitu(
+														value
+														)
+													.attr(
+														'href'
+														);
+												await links360
+													.push({
+														link360
+													});
+											});
+									await animeitu
+										(
+											'.dlbod > .smokeddl > .smokeurl + .smokeurl > a')
+										.slice(
+											0,
+											3
+											)
+										.each(
+											async (index,
+												value
+												) => {
+												let link480 =
+													await animeitu(
+														value
+														)
+													.attr(
+														'href'
+														);
+												await links480
+													.push({
+														link480
+													});
+											});
+									await animeitu
+										(
+											'.dlbod > .smokeddl > .smokeurl + .smokeurl + .smokeurl > a')
+										.slice(
+											0,
+											3
+											)
+										.each(
+											async (index,
+												value
+												) => {
+												let link720 =
+													await animeitu(
+														value
+														)
+													.attr(
+														'href'
+														);
+												await links720
+													.push({
+														link720
+													});
+											});
+									await animeitu
+										(
+											'.dlbod > .smokeddl > .smokeurl + .smokeurl + .smokeurl + .smokeurl > a')
+										.each(
+											async (index,
+												value
+												) => {
+												let link1080 =
+													await animeitu(
+														value
+														)
+													.attr(
+														'href'
+														);
+												await links1080
+													.push({
+														link1080
+													});
+											});
+									let judul =
+										await animeitu(
+											'div[class="post-thumb"] > h1[class="jdlz"]'
+											)
+										.text();
+									let genre =
+										await animeitu(
+											'div[class="info"] > p:nth-child(2)'
+											)
+										.text();
+									let totaleps =
+										await animeitu(
+											'div[class="info"] > p:nth-child(7)'
+											)
+										.text();
+									let durasi =
+										await animeitu(
+											'div[class="info"] > p:nth-child(9)'
+											)
+										.text();
+									let tglrilis =
+										await animeitu(
+											'div[class="info"] > p:nth-child(10)'
+											)
+										.text();
+									let result360 =
+										await JSON
+										.stringify(
+											links360
+											)
+										.replace(
+											/,/g,
+											'\n'
+											)
+										.replace(
+											/"/g,
+											''
+											)
+										.replace(
+											/link360/g,
+											''
+											)
+										.replace(
+											/{/g,
+											''
+											)
+										.replace(
+											/}/g,
+											''
+											)
+										.replace(
+											/\[/g,
+											''
+											)
+										.replace(
+											/\]/g,
+											''
+											);
+									let result480 =
+										await JSON
+										.stringify(
+											links480
+											)
+										.replace(
+											/,/g,
+											'\n'
+											)
+										.replace(
+											/"/g,
+											''
+											)
+										.replace(
+											/link480/g,
+											''
+											)
+										.replace(
+											/{/g,
+											''
+											)
+										.replace(
+											/}/g,
+											''
+											)
+										.replace(
+											/\[/g,
+											''
+											)
+										.replace(
+											/\]/g,
+											''
+											);
+									let result720 =
+										await JSON
+										.stringify(
+											links720
+											)
+										.replace(
+											/,/g,
+											'\n'
+											)
+										.replace(
+											/"/g,
+											''
+											)
+										.replace(
+											/link720/g,
+											''
+											)
+										.replace(
+											/{/g,
+											''
+											)
+										.replace(
+											/}/g,
+											''
+											)
+										.replace(
+											/\[/g,
+											''
+											)
+										.replace(
+											/\]/g,
+											''
+											);
+									let result1080 =
+										await JSON
+										.stringify(
+											links1080
+											)
+										.replace(
+											/,/g,
+											'\n'
+											)
+										.replace(
+											/"/g,
+											''
+											)
+										.replace(
+											/link1080/g,
+											''
+											)
+										.replace(
+											/{/g,
+											''
+											)
+										.replace(
+											/}/g,
+											''
+											)
+										.replace(
+											/\[/g,
+											''
+											)
+										.replace(
+											/\]/g,
+											''
+											);
+									return await chichi
+										.sendMessage(
+											from,
+											`Judul : ${judul}\n${genre}\n${totaleps}\n${durasi}\n${tglrilis}\n\nResolusi 360p : \n${result360}\n\nResolusi 480p : \n${result480}\n\nResolusi 720p : \n${result720}\n\nResolusi 1080p : \n${result1080}`,
+											text, {
+												quoted: mek
+											}
+											)
+								})
+					})
+			} catch (err) {
+				reply(
+					`Maaf ${pushname}, Anime yang kamu dari kusonime tidak ditemukan.`)
+			}
+			break
             case 'self': {
                 if (!m.key.fromMe && !isCreator) throw mess.owner
                 alpha.public = false
