@@ -123,6 +123,7 @@ exports.listMenu = (time, salam, pushname, prefix) => {
 
 
 ╭─❒ 「 Search 」 ❒
+├ ${prefix}kusonime [query]
 ├ ${prefix}ytsearch [query]
 ├ ${prefix}film [query]
 ├ ${prefix}wallpaper [query]
