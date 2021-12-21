@@ -136,7 +136,7 @@ exports.listMenu = (time, salam, pushname, prefix) => {
 
 
 ╭─❒ 「 Converter 」 ❒
-├ ${prefix}stiker [reply] *LAGI EROR!!*
+├ ${prefix}stiker [reply] 
 ╰❒${prefix}toimg [reply sticker]
 
 
@@ -229,7 +229,7 @@ Sanksi: *PERMANENT BLOCK*
 ➡️ Script ini masih private dan tidak pernah diperjual belikan ,bijaklah dalam mengetahui penipu.
 
 🗯️ Boleh saya menambah ke grup?
-➡️ Untuk sementara bot dalam status free to add.
+➡️ Untuk sementara bot dalam status free to add, chat owner kirimkan link group.
 
 🗯️ Prefixnya apa ya?
 ➡️ Bot ini menggunakan multi prefix. Berarti anda bisa menggunakan prefix #, . , Dan prefix wajar lainnya.
